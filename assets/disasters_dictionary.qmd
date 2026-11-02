@@ -1,0 +1,94 @@
+---
+title: FEMA Disaster Declarations Data Dictionary
+format:
+  html:
+    embed-resources: true
+---
+
+## The FEMA Disaster Declarations Data
+
+This project uses an OpenFEMA dataset provided by FEMA called [Disaster Declarations Summaries - v2](https://www.fema.gov/openfema-data-page/disaster-declarations-summaries-v2):
+
+>Disaster Declarations Summaries is a summarized dataset describing all federally declared disasters. This dataset lists all official FEMA Disaster Declarations, beginning with the first disaster declaration in 1953 and features all three disaster declaration types: major disaster, emergency, and fire management assistance. The dataset includes declared recovery programs and geographic areas (county not available before 1964; Fire Management records are considered partial due to historical nature of the dataset).
+
+Each row of `disasters.csv` is one designated area (usually a county) in one disaster declaration, so a declaration that covers 20 counties appears in 20 rows.
+
+### Disclaimers
+
+The data you will work with for this project contains a *subset* of variables from the original Disaster Declaration Summaries data. You can download the full original data set and see the complete set of data definitions [here](https://www.fema.gov/openfema-data-page/disaster-declarations-summaries-v2).
+
+This dataset also includes summary counts derived from the [Individuals and Households Program - Valid Registrations - v1](https://www.fema.gov/openfema-data-page/individuals-and-households-program-valid-registrations-v1) dataset, summed for each declaration and designated area. These counts are missing (`NA`) for designated areas with no registrations in that dataset, which covers declarations from fiscal year 2003 onward.
+
+Federal Emergency Management Agency (FEMA), OpenFEMA Datasets: Disaster Declarations Summaries - v2 and Individuals and Households Program - Valid Registrations - v1. Retrieved from https://www.fema.gov/about/openfema/data-sets in early 2025; the data includes declarations through January 15, 2025. This product uses the FEMA OpenFEMA API, but is not endorsed by FEMA. The Federal Government or FEMA cannot vouch for the data or analyses derived from these data after the data have been retrieved from the Agency's website(s).
+
+### Variables: `disasters.csv`
+
+`fema_declaration_string`: Agency standard method for uniquely identifying Stafford Act declarations - Concatenation of declaration type, disaster number and state code. Ex: DR-4393-NC
+
+`disaster_number`: Sequentially assigned number used to designate an event or incident declared as a disaster
+
+`state`: The two-letter USPS code of the U.S. state, district, territory, or freely associated state (for example `NY`, `DC`, `PR`, `GU`)
+
+`declaration_type`: Two character code that defines if this is a major disaster (`DR`), fire management (`FM`), or emergency declaration (`EM`)
+
+`declaration_date`: Date the disaster was declared
+
+`fy_declared`: Fiscal year in which the disaster was declared
+
+`incident_type`: The primary or official type of incident such as fire or flood. Secondary incident types may have been designated (see the `designated_incident_types` field)
+
+`declaration_title`: Title for the disaster
+
+`ih_program_declared`: Denotes whether the Individuals and Households Program (IHP) was declared for this disaster (`1` = yes, `0` = no)
+
+`ia_program_declared`: Denotes whether the Individual Assistance program was declared for this disaster (`1` = yes, `0` = no)
+
+`pa_program_declared`: Denotes whether the Public Assistance program was declared for this disaster (`1` = yes, `0` = no)
+
+`hm_program_declared`: Denotes whether the Hazard Mitigation program was declared for this disaster (`1` = yes, `0` = no)
+
+`incident_begin_date`: Date the incident itself began
+
+`incident_end_date`: Date the incident itself ended
+
+`disaster_closeout_date`: Date all financial transactions for all programs are completed
+
+`tribal_request`: Denotes that a declaration request was submitted directly to the President, independently of a state, by a Tribal Nation (`1` = yes, `0` = no)
+
+`fips_state_code`: FIPS two-digit numeric code used to identify the United States, the District of Columbia, US territories, outlying areas of the US and freely associated states
+
+`fips_county_code`: FIPS three-digit numeric code used to identify counties and county equivalents in the United States, the District of Columbia, US territories, outlying areas of the US and freely associated states. Please note that Indian Reservations are not counties and thus will not have a FIPS county code, please utilize the placeCode field instead. If the designation is made for the entire state, this value will be 000 as multiple (all) counties cannot be entered.
+
+`place_code`: A unique code system FEMA uses internally to recognize locations that takes the numbers '99' + the 3-digit county FIPS code. There are some declared locations that dont have recognized FIPS county codes in which case we assigned a unique identifier
+
+`designated_area`: The name or phrase describing the geographic area that was included in the declaration
+
+`declaration_request_number`: Number assigned to the declaration request
+
+`incident_id`: Unique identifier for an incident. Incidents are events that may or may not become declared disasters.
+
+`designated_incident_types`: A comma-separated list of incident types designated for the disaster. The primary incident type is described in the `incident_type` field. Codes are: 0: Not applicable; 1: Explosion; 2: Straight-Line Winds; 3: Tidal Wave; 4: Tropical Storm; 5: Winter Storm; 8: Tropical Depression; A: Tsunami; B: Biological; C: Coastal Storm; D: Drought; E: Earthquake; F: Flood; G: Freezing; H: Hurricane; I: Terrorist; J: Typhoon; K: Dam/Levee Break; L: Chemical; M: Mud/Landslide; N: Nuclear; O: Severe Ice Storm; P: Fishing Losses; Q: Crop Losses; R: Fire; S: Snowstorm; T: Tornado; U: Civil Unrest; V: Volcanic Eruption; W: Severe Storm; X: Toxic Substances; Y: Human Cause; Z: Other
+
+`n_ihp_eligible`: Number of applicants eligible for the Individuals and Households Program (IHP) (i.e., received a Housing Assistance and/or Other Needs Assistance award)
+
+`total_ihp_awarded`: Total financial IHP award for Housing Assistance (HA) and/or Other Needs Assistance (ONA) in U.S. dollars
+
+`n_ha_eligible`: Number of applicants that were eligible for the Housing Assistance program
+
+`total_ha_awarded`: Total amount awarded for Housing Assistance under IHP in U.S. dollars
+
+`n_ona_eligible`: Number of applicants eligible for Other Needs Assistance (ONA)
+
+`total_ona_awarded`: Total amount awarded for Other Needs Assistance (ONA) under IHP in U.S. dollars
+
+### Other related datasets
+
+Here is a list of other openFEMA datasets that you may want to also explore:
+
+- FEMA Regions: [FEMA Regions - v2](https://www.fema.gov/openfema-data-page/fema-regions-v2) (used in this project as `fema_regions.csv`)
+- Individual Assistance: [Individuals and Households Program - Valid Registrations - v1](https://www.fema.gov/openfema-data-page/individuals-and-households-program-valid-registrations-v1)
+- Public Assistance Projects: [Public Assistance Funded Projects Details - v1](https://www.fema.gov/openfema-data-page/public-assistance-funded-projects-details-v1)
+- Public Assistance Applicant Summary: [Public Assistance Applicants Program Deliveries - v1](https://www.fema.gov/openfema-data-page/public-assistance-applicants-program-deliveries-v1)
+- Hazard Mitigation: [Hazard Mitigation Assistance Projects - v4](https://www.fema.gov/openfema-data-page/hazard-mitigation-assistance-projects-v4)
+- NFIP Claims: [FIMA NFIP Redacted Claims - v2](https://www.fema.gov/openfema-data-page/fima-nfip-redacted-claims-v2)
+- NFIP Policies: [FIMA NFIP Redacted Policies - v2](https://www.fema.gov/openfema-data-page/fima-nfip-redacted-policies-v2)

@@ -1,0 +1,28 @@
+---
+title: FEMA Regions Data Dictionary
+format:
+  html:
+    embed-resources: true
+---
+
+## The FEMA Regions Data
+
+This project uses an OpenFEMA dataset provided by FEMA called [FEMA Regions - v2](https://www.fema.gov/openfema-data-page/fema-regions-v2):
+
+>Provides a list of FEMA Regions including the address for each region's headquarters as well as a point in GeoJSON format that identifies headquarters and a geometry shape for the region in GeoJSON format.
+
+FEMA has ten regional offices. Each one works with the states, territories, and Tribal Nations in its region: https://www.fema.gov/about/organization/regions
+
+### Disclaimers
+
+The data you will work with for this project contains a *subset* of variables from the original FEMA Regions data, reshaped so that each row is one state in one region (the original data lists all of a region's states in a single field). The FEMA Headquarters record, which belongs to no region, is not included. The state codes are kept exactly as FEMA publishes them in this dataset.
+
+Federal Emergency Management Agency (FEMA), OpenFEMA Dataset: FEMA Regions - v2. Retrieved from https://www.fema.gov/openfema-data-page/fema-regions-v2 on November 2, 2026. This product uses the FEMA OpenFEMA API, but is not endorsed by FEMA. The Federal Government or FEMA cannot vouch for the data or analyses derived from these data after the data have been retrieved from the Agency's website(s).
+
+### Variables: `fema_regions.csv`
+
+`region`: The FEMA region number (1-10)
+
+`region_office`: The city of the region's headquarters (its regional office)
+
+`state`: The code of a state, district, territory, or freely associated state in the region, as listed in the FEMA Regions dataset. Most are two-letter USPS codes, but a few Pacific jurisdictions are listed with other abbreviations.

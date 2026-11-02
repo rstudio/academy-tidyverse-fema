@@ -1,0 +1,93 @@
+---
+title: "Wrangle rows and columns"
+format: html
+---
+
+# Instructions
+
+This week, you learned several more functions from the dplyr package (pronounced DEE-ply-er). These functions help you work with the rows and columns in your data set.
+
+You'll use these skills to add a new column that contains the cumulative financial IHP assistance awarded over time for the disasters in New York for which the IHP was declared.
+
+To learn more about the variables contained in the data set, refer to the data dictionary: https://rstudio.github.io/academy-tidyverse-fema/assets/disasters_dictionary.html
+
+# Milestone
+
+```{r}
+#| label: setup
+#| include: false
+
+# Load your packages here
+
+```
+
+## Create and select columns
+
+In this milestone, you'll create a new variable that contains the cumulative value of `total_ihp_awarded` over time for the IHP-declared disasters in New York. You'll then select the columns that tell that story.
+
+## Recreation
+
+### Part 1 - Import
+
+Before you begin, you will need to import your data set. Use the code chunk below to read the data from the data file `disasters.csv`, which is stored in the `data/` folder in your working directory. Be sure to save the data to an object named `disasters`.
+
+```{r}
+#| label: recreation-import
+
+```
+
+### Part 2 - Create
+
+Run the code below to see a table.
+
+```{r}
+#| label: recreate-this
+#| message: false
+solution <- readr::read_csv("data/milestone03.csv")
+solution
+```
+
+Your task is to use what you've learned about the dplyr package to transform `disasters` into this table. You will need to:
+
+1. Filter the data to records from New York (`state` is `"NY"`) where the IHP was declared (`ih_program_declared` is `1`)
+2. Remove the records that have no award data (`total_ihp_awarded` is `NA`). *Hint:* once `cumsum()` meets a missing value, every value from there on is `NA`.
+3. Arrange the rows by `declaration_date`, from earliest to latest. Many records share a declaration date (every designated area of a declaration does); keep those in their original order, which is what `arrange()` does when you sort by `declaration_date` alone.
+4. Create a new column named `cumul_total_ihp_awarded`, which contains the result of `cumsum()` applied to `total_ihp_awarded`
+5. Select six columns: `fema_declaration_string`, `declaration_date`, `incident_type`, `designated_area`, `total_ihp_awarded`, `cumul_total_ihp_awarded`
+
+Work in the code chunk below. Save the result as `ny_ihp_cumul`.
+
+```{r}
+#| label: recreation-create
+
+```
+
+Run the following code chunk to test whether you have the same answer as the solution:
+
+```{r}
+#| label: compare
+#| eval: false
+waldo::compare(ny_ihp_cumul, solution, tolerance = 1e-4)
+```
+
+Look at how `cumul_total_ihp_awarded` grows from row to row. Which declarations added the most?
+
+## Extension
+
+Using the code chunk below, investigate a single research question about this data, using the additional data wrangling skills you learned this week. Some ideas:
+
+1. Plot `cumul_total_ihp_awarded` against `declaration_date` to show how assistance in New York accumulated over time. Which disasters caused the biggest jumps?
+2. Use `case_when()` to group the incident types into a few broader categories (for example, storms, floods, and other), then compare the assistance awarded for each category.
+3. Repeat the analysis for another state, or use `group_by()` before `mutate()` to compute the cumulative assistance for every state at once.
+4. [any other research question of interest]
+
+Alternately, working with a data set of your own, complete the following:
+
+1. Read in your data
+2. Create at least one new variable in your data set (using `mutate()` and/or `summarize()`), or use other dplyr functions to alter your data
+3. Use your updated data set to create at least one graph and/or table
+
+```{r}
+#| label: extension
+
+```

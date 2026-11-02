@@ -1,0 +1,114 @@
+---
+title: "Import and visualize"
+format: html
+---
+
+# Instructions
+
+Welcome to your first project milestone! In this project, you will use the **tidyverse** to investigate real data on FEMA disaster declarations.
+
+When a disaster strikes, the Federal Emergency Management Agency (FEMA) can declare it a federal disaster, which makes recovery programs available to the people and communities affected. By the end of this project, we'd like to understand which types of disasters are declared across the U.S. and how financial assistance from FEMA's Individuals and Households Program (IHP) is distributed across states and FEMA regions. We will split our work into milestones that build on each other to iteratively explore the data.
+
+## How to complete a milestone
+
+Each milestone will require you to read and edit a Quarto document, like this one. **To learn how to use Quarto in Positron and RStudio, see here: https://quarto.org/docs/get-started/hello/positron.html.**
+
+For each milestone, you will need to:
+
+1. **Recreate a result,** like a plot, table, or model. This will require you to use the skills you have studied that week.
+
+2. **Extend the result.** Explore a new question about the data--this will provide an opportunity to both apply the skills you learned that week and to teach yourself something new. We will provide suggestions each week, but you are encouraged to explore any aspect of the data that interests you. Alternatively, apply and extend the skills you learned that week by working with your own data. Remember, being able to teach yourself new parts of a computer language is what will make you a truly competent open source programmer---and we are here to help.
+
+You'll share your extension with your groupmates at the weekly meeting, and show them how they could do the same.
+
+## The `disasters` data set
+
+The data comes from OpenFEMA, FEMA's open data program: the Disaster Declarations Summaries data set (https://www.fema.gov/openfema-data-page/disaster-declarations-summaries-v2), combined with summary counts from the Individuals and Households Program - Valid Registrations data set (https://www.fema.gov/openfema-data-page/individuals-and-households-program-valid-registrations-v1).
+
+To learn more about the variables contained in the data set, refer to the data dictionary: https://rstudio.github.io/academy-tidyverse-fema/assets/disasters_dictionary.html
+
+# Milestone
+
+```{r}
+#| label: setup
+#| include: false
+library(tidyverse)
+```
+
+## R Basics
+
+In this milestone, you'll become familiar with the `disasters` data set.
+
+## Recreation
+
+### Part 1 - Import
+
+In the code chunk below, use a command **from the readr package** to read in the data set.
+
+* The data set lives in the file `disasters.csv`, which is stored in the `data/` folder in your working directory.
+* Save the data set as an object named `disasters`.
+
+_Note_: Both `read_csv()` and `read.csv()` read data from a CSV file, but they differ slightly in _how_ they read in data. Make sure you use the tool from the readr package. (Not sure which is which? Check the help documentation.)
+
+```{r}
+#| label: recreation-import
+
+```
+
+### Part 2 - Explore
+
+Each record in `disasters` describes one designated area (usually a county) in one disaster declaration, so a single declaration can span many records.
+
+Use R to inspect the contents of `disasters`:
+
+- Display the contents of `disasters`
+- Use `nrow()` to find the number of records in `disasters`
+- Use `min()` to find the earliest declaration date (`declaration_date`)
+- Use `count()` from the dplyr package to count the number of records for each state (`state`)
+- Use `summary()` to generate a summary of the data set
+
+*Hint:* you may want to look up the help pages for each of these functions.
+
+Write your code in the following chunk:
+
+```{r}
+#| label: recreation
+
+```
+
+### Part 3 - Visualize
+
+Using the File Explorer, navigate to the `images/` directory, then click on `milestone01.png` to open an image.
+
+You should see a plot that displays the number of records for each incident type in **New York state** (`NY`).
+
+Use `ggplot()` in the chunk below to re-create the plot. **Note** Before plotting, you will first need to filter your data set to only include records from New York.
+
+*Hint:* `geom_bar()` counts the values of the variable you map to `x`. Map `incident_type` to `y` instead to draw horizontal bars, which keeps the incident type labels readable.
+
+```{r}
+#| label: recreation-visualize
+
+```
+
+## Extension
+
+Using the code chunk below, investigate a research question about this data, using the visualization skills you learned this week.
+
+Some ideas (we encourage you to choose one):
+
+1. Your recreation focused on the incident types declared in New York. How does the mix of incident types in New York compare to a state in another part of the country, such as Florida or California?
+2. How has the number of records changed over time (`fy_declared`) in a state of your choice? Do any years stand out?
+3. The data contains three declaration types (`declaration_type`): major disasters (`DR`), emergencies (`EM`), and fire management assistance (`FM`). Which incident types lead to each type of declaration?
+4. [any other research question of interest]
+
+Alternately, working with a data set of your own, complete the following:
+
+1. Read in your data
+2. Filter your data using a logical test/condition
+3. Graph this data subset using at least one geom
+
+```{r}
+#| label: extension
+
+```

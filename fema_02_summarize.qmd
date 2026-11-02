@@ -1,0 +1,94 @@
+---
+title: "Summarize data"
+format: html
+---
+
+# Instructions
+
+This week, you learned several new functions from dplyr (pronounced DEE-ply-er), a commonly-used package from the tidyverse for wrangling data. You also learned some new ways to enhance your plots.
+
+You'll use these skills to find the ten states that received the most financial assistance from FEMA's Individuals and Households Program (IHP).
+
+To learn more about the variables contained in the data set, refer to the data dictionary: https://rstudio.github.io/academy-tidyverse-fema/assets/disasters_dictionary.html
+
+# Milestone
+
+```{r}
+#| label: setup
+#| include: false
+
+# Load your packages here
+
+```
+
+## Summarize data
+
+In this milestone you'll group the data by state and then summarize the results to determine the ten states with the highest total financial IHP awards across the disasters for which the IHP was declared.
+
+## Recreation
+
+### Part 1 - Import
+
+Before you begin, you will need to import your data set. Use the code chunk below to read the data from the data file `disasters.csv`, which is stored in the `data/` folder in your working directory. Be sure to save the data to an object named `disasters`.
+
+```{r}
+#| label: recreation-import
+
+```
+
+### Part 2 - Summarize data
+
+Run the code below to see a table.
+
+```{r}
+#| label: recreate-this
+#| message: false
+solution <- readr::read_csv("data/milestone02.csv")
+solution
+```
+
+Your task is to use what you've learned about the dplyr package to transform `disasters` into this table. You will need to:
+
+1. Filter the data to records where the IHP was declared (`ih_program_declared` is `1`)
+2. Group the data by `state`
+3. Summarize each group: count the distinct disasters in a column named `n_disasters` (*Hint:* `n_distinct(disaster_number)`), and compute the total `n_ihp_eligible` and the total `total_ihp_awarded`
+4. Use `slice_max()` to find the ten states with the highest `total_ihp_awarded`
+
+*Hint:* some records have no award data. What does `sum()` return when its input contains a missing value (`NA`)?
+
+Work in the code chunk below. Save the result as `ihp_by_state`.
+
+```{r}
+#| label: recreation-summary
+
+```
+
+Run the following code chunk to test whether you have the same answer as the solution:
+
+```{r}
+#| label: compare
+#| eval: false
+waldo::compare(ihp_by_state, solution, tolerance = 1e-4)
+```
+
+Which kinds of disasters do you think explain these totals? Extension idea 3 below is one way to check.
+
+## Extension
+
+Using the code chunk below, investigate a single research question about this data, using the data wrangling skills you learned this week. Some ideas:
+
+1. Data visualization is often an easier way to see patterns than numbers in a table. Build a graph from your summary table of the ten states with the highest `total_ihp_awarded`. Do the states with more eligible applicants (`n_ihp_eligible`) always receive more assistance?
+2. IHP awards are made up of Housing Assistance (`total_ha_awarded`) and Other Needs Assistance (`total_ona_awarded`). Which states receive the largest share of their assistance as Housing Assistance?
+3. Which incident types account for the most financial IHP assistance? Use `n_distinct()` to count how many declarations (`disaster_number`) of each incident type there were, too.
+4. [any other research question of interest]
+
+Alternately, working with a data set of your own, complete the following:
+
+1. Read in your data
+2. Use `group_by()` and `summarize()` to produce a simple table from some subset of your data
+3. Create a related graph of this data subset using ggplot
+
+```{r}
+#| label: extension
+
+```

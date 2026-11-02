@@ -1,0 +1,109 @@
+---
+title: "Tidy and join tables"
+format: html
+---
+
+# Instructions
+
+This week you learned about tidying and joining data sets with the tidyr (pronounced tidy-R) and dplyr packages.
+
+Joining data sets can be deceptively tricky. It is important to keep in mind that prepping and inspecting the tables you're working with *before* you do a join is often more important (and takes more time) than doing the join itself.
+
+You'll use some of these skills in the milestone below.
+
+To learn more about the variables contained in the data sets, refer to the data dictionaries: https://rstudio.github.io/academy-tidyverse-fema/assets/disasters_dictionary.html and https://rstudio.github.io/academy-tidyverse-fema/assets/fema_regions_dictionary.html
+
+# Milestone
+
+```{r}
+#| label: setup
+#| include: false
+
+# Load your packages here
+
+```
+
+## Tidy and join
+
+FEMA divides the U.S. into ten regions, each with its own regional office: https://www.fema.gov/about/organization/regions. In this milestone, you'll compute the total financial IHP assistance awarded in each FEMA region. To do this, you'll need to use the data in `fema_regions.csv` alongside the data you've been using in `disasters.csv`. Both data sets are stored in your `data/` directory.
+
+## Recreation
+
+### Part 1 - Import
+
+Before you begin, you will need to import your data sets. Use the code chunk below to read two data sets from the `data/` directory:
+
+1. `disasters.csv`, save it as `disasters`
+2. `fema_regions.csv`, save it as `fema_regions`
+
+```{r}
+#| label: recreation-import
+
+```
+
+### Part 2 - Join tables
+
+Run the code below to see a table.
+
+```{r}
+#| label: recreate-this
+#| message: false
+solution <- readr::read_csv("data/milestone04.csv")
+solution
+```
+
+Your task is to use what you've learned about the dplyr package to transform `disasters` and `fema_regions` into this table. You will need to do some pre-join checks:
+
+1. Which variables can you join on?
+2. Do the data sets have any mismatched observations?
+3. Perform any necessary data cleaning.
+4. Check again as needed!
+
+Hint: you can use the `anti_join()` function to find observations in `disasters` that do not have a match in `fema_regions`, and the other way around. The two data sets come from different FEMA sources, so don't assume they use the same codes.
+
+When you are satisfied with your data:
+
+1. Join the cleaned data sets (or clean as part of your pipe)
+2. Filter the data to records where the IHP was declared (`ih_program_declared` is `1`)
+3. Compute useful summaries grouped by `region`:
+    - `n_disasters`, the number of distinct disasters (`disaster_number`)
+    - `n_ihp_eligible`, the total number of eligible applicants
+    - `total_ihp_awarded`, the total financial IHP assistance awarded
+4. Create a new column named `total_ihp_awarded_millions` that contains `total_ihp_awarded` divided by 1,000,000
+
+Work in the code chunk below. Save the result as `ihp_by_region`.
+
+```{r}
+#| label: recreation-join
+
+```
+
+Run the following code chunk to test whether you have the same answer as the solution:
+
+```{r}
+#| label: compare
+#| eval: false
+waldo::compare(ihp_by_region, solution, tolerance = 1e-4)
+```
+
+Did any records stay unmatched after your cleaning? Why doesn't that change this table?
+
+## Extension
+
+Using the code chunk below, investigate a single research question about this data, using the skills you have learned this week and in previous weeks of Academy. Some ideas:
+
+1. Create a visualization using the joined data from the milestone recreation. Use this visualization as the starting point for your own further investigation of the data. Use at least one data transformation step and one graph to start addressing your additional research question. (*Hint:* map `factor(region)` to an axis so ggplot2 treats the region numbers as categories.)
+2. `total_ihp_awarded` is the sum of Housing Assistance (`total_ha_awarded`) and Other Needs Assistance (`total_ona_awarded`). Use `pivot_longer()` to put both kinds of assistance in one column, then compare them across regions with a stacked or dodged bar chart.
+3. Each region has a regional office (`region_office`). Label your summary with the office cities, or find a state-level data set (for example, population) to join in and compute the assistance per person.
+4. [any other research question of interest]
+
+Alternately, working with a data set of your own, complete the following:
+
+1. Read in your data
+2. Complete a data wrangling task relevant to your data (tidying and/or reshaping/pivoting your data); if appropriate, join your data with a second data set (filtering or mutating join)
+3. Show summary tables of your data throughout these transformations
+
+```{r}
+#| label: extension
+
+```

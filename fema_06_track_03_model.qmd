@@ -1,0 +1,28 @@
+---
+title: "Track III: Transform and model"
+format: html
+---
+
+# Instructions
+
+For this final milestone, apply what you have learned about data transformation and modeling to further explore the FEMA disaster declarations data set. Consider the following steps:
+
+1. Read in your data
+2. Wrangle your data so it is in a format that is ready for modeling
+3. Create a simple regression model and inspect your model results using functions from the broom package
+
+For example, you might fit a linear regression model that uses the number of eligible applicants (`n_ihp_eligible`) and the incident type to predict the financial IHP assistance awarded to a designated area (`total_ihp_awarded`).
+
+To learn more about the variables contained in the data sets, refer to the data dictionaries: https://rstudio.github.io/academy-tidyverse-fema/assets/disasters_dictionary.html and https://rstudio.github.io/academy-tidyverse-fema/assets/fema_regions_dictionary.html
+
+# Milestone
+
+```{r}
+#| label: setup
+#| include: false
+
+# loading packages
+library(tidyverse)
+```
+
+## Transform and model

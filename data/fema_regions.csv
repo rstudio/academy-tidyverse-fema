@@ -1,0 +1,59 @@
+region,region_office,state
+1,Boston,CT
+1,Boston,MA
+1,Boston,ME
+1,Boston,NH
+1,Boston,RI
+1,Boston,VT
+2,New York,NJ
+2,New York,NY
+2,New York,PR
+2,New York,VI
+3,Philadelphia,DC
+3,Philadelphia,DE
+3,Philadelphia,MD
+3,Philadelphia,PA
+3,Philadelphia,VA
+3,Philadelphia,WV
+4,Atlanta,AL
+4,Atlanta,FL
+4,Atlanta,GA
+4,Atlanta,KY
+4,Atlanta,MS
+4,Atlanta,NC
+4,Atlanta,SC
+4,Atlanta,TN
+5,Chicago,IL
+5,Chicago,IN
+5,Chicago,MI
+5,Chicago,MN
+5,Chicago,OH
+5,Chicago,WI
+6,Denton,AR
+6,Denton,LA
+6,Denton,NM
+6,Denton,OK
+6,Denton,TX
+7,Kansas City,IA
+7,Kansas City,KS
+7,Kansas City,MO
+7,Kansas City,NE
+8,Denver,CO
+8,Denver,MT
+8,Denver,ND
+8,Denver,SD
+8,Denver,UT
+8,Denver,WY
+9,Oakland,AS
+9,Oakland,AZ
+9,Oakland,CA
+9,Oakland,CNMI
+9,Oakland,FSM
+9,Oakland,GUAM
+9,Oakland,HI
+9,Oakland,NV
+9,Oakland,RMI
+10,Bothell,AK
+10,Bothell,ID
+10,Bothell,OR
+10,Bothell,WA
